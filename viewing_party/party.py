@@ -12,16 +12,13 @@ def create_movie(title, genre, rating):
 
 
 def add_to_watched(user_data, movie):
-    pass
+    '''
+    Accepts two params: user_data(dictionary) and movie(dictionary)
+    Returns an updated user_data containing the movie
+    '''
+    user_data["watched"].append(movie)
+    return user_data
 
-    # if user_data = None, we get -> []
-    # user_data = {watched: [{title: "title", "genre": "genre", "rating": "rating"}, {}, {}]}
-    # user_data = {watched: []} <<<< the user has no movies in their watched list
-    # movie = {"title": "Title A","genre": "Horror",rating": 3.5}
-
-    #user_data(watched).update({movie})
-
-    #return user_data
 
 def add_to_watchlist(user_data, movie):
     pass
