@@ -187,14 +187,6 @@ def test_moves_movie_from_watchlist_to_watched():
     assert len(updated_data["watched"]) == 2
 
     assert updated_data["watched"][1]["title"] == movie_to_watch["title"]
-    #assert isthismovie == this movie
-
-    
-
-    # raise Exception("Test needs to be completed.")
-    # *******************************************************************************************
-    # ****** Add assertions here to test that the correct movie was added to "watched" **********
-    # *******************************************************************************************
 
 # @pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():

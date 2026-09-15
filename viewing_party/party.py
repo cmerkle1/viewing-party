@@ -47,7 +47,28 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
-    pass
+    '''
+    Accepts one param: user_data(dictionary)
+    Returns: average_rating(float)
+    '''
+    ratings_total = 0
+    num_ratings = 0
+
+    # if watched list is empty, return 0.0
+    if not user_data["watched"]:
+        return 0.0
+
+    # Loop through watched ratings, add to the ratings_total and increase num_ratings
+    for dict in user_data["watched"]:
+       rating = dict["rating"]
+       ratings_total += rating
+       num_ratings += 1
+
+    # Calculate average using ratings_total and dividing by num_ratings
+    average_rating = float(ratings_total/num_ratings)
+
+    return average_rating
+
 
 def get_most_watched_genre(user_data):
     pass
