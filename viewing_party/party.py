@@ -60,9 +60,9 @@ def get_watched_avg_rating(user_data):
 
     # Loop through watched ratings, add to the ratings_total and increase num_ratings
     for dict in user_data["watched"]:
-       rating = dict["rating"]
-       ratings_total += rating
-       num_ratings += 1
+        rating = dict["rating"]
+        ratings_total += rating
+        num_ratings += 1
 
     # Calculate average using ratings_total and dividing by num_ratings
     average_rating = float(ratings_total/num_ratings)
@@ -71,7 +71,36 @@ def get_watched_avg_rating(user_data):
 
 
 def get_most_watched_genre(user_data):
-    pass
+        place_for_genres = []
+        genre_freq_count = {}
+        count = 0
+        most_watched_genre = ""
+
+        #if the value of "watched" is an empty list, return None
+        if user_data["watched"] == []:
+            return None
+
+        #put genre titles in a list
+        for movie in user_data["watched"]:
+                if "genre" in movie:
+                    genre_title = movie["genre"]
+                    place_for_genres.append(genre_title)
+
+        #make a dictionary with freq count based on list
+        for i in place_for_genres:
+            if i not in genre_freq_count:
+                genre_freq_count[i] = 1
+            else:
+                genre_freq_count[i] += 1
+
+        #find the most freq genre
+        for i in genre_freq_count:
+            if genre_freq_count[i] > count:
+                most_watched_genre = i
+                count = genre_freq_count[i]
+        #return
+        return(most_watched_genre)
+
 
 
 # -----------------------------------------
