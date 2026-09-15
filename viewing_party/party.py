@@ -32,13 +32,15 @@ def add_to_watchlist(user_data, movie):
     #user_data(watchlist).update({movie})
 
 def watch_movie(user_data, title):
-    pass
+    # Iterate through user_data
+    for movie in user_data["watchlist"]:
 
-    # user_data = {watchlist: [{}, {}, {}], watched: [{}, {}, {}]}
-    # if title in user_data(watchlist):
-        #user_data(watchlist).remove(title)
-        #user_data(watched).update(title) ???what about genrea and rating?
-    #return user_data
+        # If the movie's title is already in watched
+        if movie["title"] == title:
+            user_data["watchlist"].remove(movie) # Remove from watchlist
+            user_data["watched"].append(movie) # Add to watched
+
+    return user_data
 
 
 # -----------------------------------------
