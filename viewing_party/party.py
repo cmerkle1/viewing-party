@@ -6,6 +6,7 @@ def create_movie(title, genre, rating):
     # if title, genre, and rating are Truthy, add to dictionary
     if title and genre and rating:
         movie.update({"title": title, "genre": genre, "rating": rating})
+        return movie
     # otherwise return None
     else:
         return None
@@ -21,7 +22,8 @@ def add_to_watched(user_data, movie):
 
 
 def add_to_watchlist(user_data, movie):
-    pass
+    user_data["watchlist"].append(movie)
+    return user_data
 
     # user_data = {watchlist: [{title : "title", "genre": "genre", "rating": "rating"}, {}, {}]}
     # user_data = {watchlist: []} <<<< the user has no movies they want to watch
