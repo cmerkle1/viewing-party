@@ -102,11 +102,14 @@ def get_most_watched_genre(user_data):
         return(most_watched_genre)
 
 
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-
+def get_unique_watched(user_data):
+    '''
+    Accepts one param: user_data(dictionary)
+    Returns: a list of dictionaries(represents a list of movies)
+    '''
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
