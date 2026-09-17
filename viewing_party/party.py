@@ -111,6 +111,23 @@ def get_unique_watched(user_data):
     Returns: a list of dictionaries(represents a list of movies)
     '''
 
+    # user_data is a dict with 'watched' list of movie dicts and 'friends' list of friend dicts
+    # each friend has a 'watched' key
+    # each movie has a 'title' key
+    # return only movies that user has watched that NONE of their friends have watched
+    # return a list of the user's movie dicts that meet this condition
+
+def get_friends_unique_watched(user_data):
+    '''
+    Accepts one param: user_data(dictionary)
+    Returns: a list of dicts representing a list of movies
+    '''
+    # user_data is a dict with 'watched' list of movie dicts and 'friends' list of friend dicts
+    # each friend has a 'watched' key
+    # each movie dict has a 'title' key
+    # find movies that at least one friend has watched but user has NOT watched
+    # return a list of movie dicts
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
