@@ -110,18 +110,36 @@ def get_unique_watched(user_data):
     Accepts one param: user_data(dictionary)
     Returns: a list of dictionaries(represents a list of movies)
     '''
+    unique_watched = []
+    user_watched = user_data["watched"] # Access the watched list of movies
+    friends_watched = user_data["friends"] # Access the friends list of movies
+    found_movie = False # Use to determine if a movie has been found
 
-    # user_data is a dict with 'watched' list of movie dicts and 'friends' list of friend dicts
-    # each friend has a 'watched' key
-    # each movie has a 'title' key
-    # return only movies that user has watched that NONE of their friends have watched
-    # return a list of the user's movie dicts that meet this condition
+    # Iterate through all movies in user_data
+    for movie in user_watched: # Look at movie data in user_watched
+        for friend in friends_watched: # Go through each friend in the friends list
+            for friend_movie in friend["watched"]: # Check each of the watched movies for that friend
+                if movie["title"] == friend_movie["title"]: # If the title is found, boolean is True
+                    found_movie = True
+
+            if not found_movie: # Else it's a unique movie, append to unique_watched
+                unique_watched.append(movie)
+
+    return unique_watched
+
 
 def get_friends_unique_watched(user_data):
     '''
-    Accepts one param: user_data(dictionary)
-    Returns: a list of dicts representing a list of movies
+  - the value of `user_data` will be a dictionary with a `"watched"` list of movie dictionaries, and a `"friends"`
+    - This represents that the user has a list of watched movies and a list of friends
+    - The value of `"friends"` is a list
+    - Each item in `"friends"` is a dictionary. This dictionary has a key `"watched"`, which has a list of movie dictionaries.
+    - Each movie dictionary has a `"title"`.
+- Consider the movies that the user has watched, and consider the movies that their friends have watched. Determine which movies at least one of the user's friends have watched, but the user has not watched.
+- Return a list of dictionaries, that represents a list of movies
+user_data = {"watched":xxxxxx, "friends":xxxxxx}
     '''
+    pass
     # user_data is a dict with 'watched' list of movie dicts and 'friends' list of friend dicts
     # each friend has a 'watched' key
     # each movie dict has a 'title' key
