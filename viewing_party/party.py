@@ -159,32 +159,8 @@ def get_friends_unique_watched(user_data):
 
     return(unique_watched)
 
-        
-'''
-for movie in user_watched: # Look at movie data in user_watched
-    if movie not in friends_watched: # If the title is found, boolean is True
-        unique_watched.append(movie)
-    {
-    'watched':
-        [{'title': 'The Lord of the Functions: The Fellowship of the Function','genre': 'Fantasy','rating': 4.8},
-        {'title': 'The Lord of the Functions: The Two Parameters','genre': 'Fantasy','rating': 4.0},
-        {'title': 'The Lord of the Functions: The Return of the Value','genre': 'Fantasy','rating': 4.0},
-        {'title': 'The JavaScript and the React','genre': 'Action', rating': 2.2},
-        {'title': 'Recursion','genre': 'Intrigue', 'rating': 2.0},
-        {'title': 'Instructor Student TA Manager','genre': 'Intrigue','rating': 4.5}],
 
-    'friends':
-        [{'watched':
-            [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8},
-            {'title': 'The Lord of the Functions: The Return of the Value', 'genre': 'Fantasy', 'rating': 4.0},
-            {'title': 'The Programmer: An Unexpected Stack Trace', 'genre': 'Fantasy', 'rating': 4.0},
-            {'title': 'It Came from the Stack Trace', 'genre': 'Horror', 'rating': 3.5}]},
-        {'watched': [{'title': 'The Lord of the Functions: The Fellowship of the Function', 'genre': 'Fantasy', 'rating': 4.8},
-        {'title': 'The JavaScript and the React', 'genre': 'Action', 'rating': 2.2},
-        {'title': 'Recursion', 'genre': 'Intrigue', 'rating': 2.0},
-        {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}]}]
-    }
-'''
+
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
@@ -241,10 +217,40 @@ def get_new_rec_by_genre(user_data):
 
     return recommended_movies
 
-    
+
 def get_rec_from_favorites(user_data):
+    recommended_movies = []
+
+    user_favorites = user_data["favorites"]
+    user_friends = user_data["friends"]
+
+    for movie in user_favorites:
+
+        movie_watched = False
+
+        for friend in user_friends:
+
+            if movie in friend["watched"]:
+                movie_watched = True
+
+        if movie_watched == False:
+            recommended_movies.append(movie)
+
+    return recommended_movies
+
+
+
     '''
     Accepts one param: user_data(dict)
     Returns recommended_movies(list) or
     None if none of the user's friends have watched
     '''
+
+
+'''
+
+- Determine a list of recommended movies. A movie should be added to this list if and only if:
+  - The movie is in the user's `"favorites"`
+  - None of the user's friends have watched it
+- Return the list of recommended movies
+'''
