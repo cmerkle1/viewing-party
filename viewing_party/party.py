@@ -213,19 +213,35 @@ def get_new_rec_by_genre(user_data):
     Accepts one param: user_data(dict)
     Returns recommended_movies(list)
     '''
+    top_genre = {} # empty dict to store genres and counts
+    user_watched = user_data["watched"] # Access the watched list of movies
+
+    # Takes a count of the genres in the user's watched list
+    for movie in user_watched:
+        if movie["genre"] not in top_genre:
+            top_genre[movie["genre"]] = 1
+        else:
+            top_genre[movie["genre"]] += 1
+
+    # Find the highest count in the top_genre dict
+    genre_counter = 0
+    most_watched_genre = ""
+
+    for genre in top_genre:
+        if top_genre[genre] > genre_counter:
+            genre_counter = top_genre[genre]
+            most_watched_genre = genre
+
     # Empty list to store recommended movies
     recommended_movies = []
     movie_from_friends = get_friends_unique_watched(user_data) # return list from wave 3 function
+    for movie in movie_from_friends:
+        if movie["genre"] == most_watched_genre: # movies matching genre get added
+            recommended_movies.append(movie)
 
-    # Users most frequent genre
-    top_genre = {}
-    user_watched = user_data["watched"] # Access the watched list of movies
+    return recommended_movies
 
-    for movie in user_watched:
-        if movie["genre"] not in top_genre:
-            top_genre["genre"] = 1
-        top_genre["genre"] += 1
-
+    
 def get_rec_from_favorites(user_data):
     '''
     Accepts one param: user_data(dict)
