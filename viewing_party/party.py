@@ -89,29 +89,29 @@ def get_most_watched_genre(user_data):
         count = 0
         most_watched_genre = ""
 
-        #if the value of "watched" is an empty list, return None
+        # f the value of "watched" is an empty list, return None
         if user_data["watched"] == []:
             return None
 
-        #put genre titles in a list
+        #p ut genre titles in a list
         for movie in user_data["watched"]:
                 if "genre" in movie:
                     genre_title = movie["genre"]
                     place_for_genres.append(genre_title)
 
-        #make a dictionary with freq count based on list
+        # make a dictionary with freq count based on list
         for i in place_for_genres:
             if i not in genre_freq_count:
                 genre_freq_count[i] = 1
             else:
                 genre_freq_count[i] += 1
 
-        #find the most freq genre
+        # find the most freq genre
         for i in genre_freq_count:
             if genre_freq_count[i] > count:
                 most_watched_genre = i
                 count = genre_freq_count[i]
-        #return
+        # return
         return(most_watched_genre)
 
 
@@ -158,8 +158,6 @@ def get_friends_unique_watched(user_data):
                 unique_watched.append(friends_watched)
 
     return(unique_watched)
-
-
 
 
 # -----------------------------------------
@@ -219,6 +217,11 @@ def get_new_rec_by_genre(user_data):
 
 
 def get_rec_from_favorites(user_data):
+    '''
+    Accepts one param: user_data(dict)
+    Returns recommended_movies(list) or
+    None if none of the user's friends have watched
+    '''
     recommended_movies = []
 
     user_favorites = user_data["favorites"]
@@ -237,20 +240,3 @@ def get_rec_from_favorites(user_data):
             recommended_movies.append(movie)
 
     return recommended_movies
-
-
-
-    '''
-    Accepts one param: user_data(dict)
-    Returns recommended_movies(list) or
-    None if none of the user's friends have watched
-    '''
-
-
-'''
-
-- Determine a list of recommended movies. A movie should be added to this list if and only if:
-  - The movie is in the user's `"favorites"`
-  - None of the user's friends have watched it
-- Return the list of recommended movies
-'''
