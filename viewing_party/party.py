@@ -1,6 +1,10 @@
 # ------------- WAVE 1 --------------------
 
 def create_movie(title, genre, rating):
+    '''
+    Accepts three params: title(str), genre(str), rating(float)
+    Returns movie(dict), or None if any param is missing
+    '''
     # empty dictionary to create movie
     movie = {}
     # if title, genre, and rating are Truthy, add to dictionary
@@ -22,16 +26,20 @@ def add_to_watched(user_data, movie):
 
 
 def add_to_watchlist(user_data, movie):
+    '''
+    Accepts two params: user_data(dict), movie(dict)
+    returns user_data(dict) updated with new movies
+    '''
     user_data["watchlist"].append(movie)
     return user_data
 
-    # user_data = {watchlist: [{title : "title", "genre": "genre", "rating": "rating"}, {}, {}]}
-    # user_data = {watchlist: []} <<<< the user has no movies they want to watch
-    # movie = {"title": "Title A","genre": "Horror",rating": 3.5}
-
-    #user_data(watchlist).update({movie})
 
 def watch_movie(user_data, title):
+    '''
+    Accepts two params: user_data(dict) and title(str)
+    Returns: user_data(dict), updated to remove a movie from
+    watchlist and place into watched
+    '''
     # Iterate through user_data
     for movie in user_data["watchlist"]:
 
@@ -71,6 +79,11 @@ def get_watched_avg_rating(user_data):
 
 
 def get_most_watched_genre(user_data):
+        '''
+        Accepts one param: user_data(dict)
+        Returns most_watched_genre(str), or None
+        if watched is an empty list.
+        '''
         place_for_genres = []
         genre_freq_count = {}
         count = 0
@@ -130,15 +143,20 @@ def get_unique_watched(user_data):
 
 
 def get_friends_unique_watched(user_data):
+    '''
+    Accepts one param: user_data(dict)
+    Returns unique_watched(dict)
+    '''
     unique_watched = []
     user_watched = user_data["watched"] # Access the watched list of movies
-    friends_watched = user_data['friends'][0]['watched'] # Access the friends list of movies
-    found_movie = False # Use to determine if a movie has been found
+    friend_list = user_data["friends"]# Access the friends list of movies
 
-    # Iterate through all movies in user_data
-    for i in friends_watched:
-        if i not in user_watched:
-            unique_watched.append(i)
+    # Iterate through all movies
+    for movie_data in friend_list: # Looping through inner loop of friends
+        for friends_watched in movie_data["watched"]: # Checking each movie inside of watched
+            if friends_watched not in user_watched and friends_watched not in unique_watched:
+                unique_watched.append(friends_watched)
+
     return(unique_watched)
 
         
@@ -167,16 +185,28 @@ for movie in user_watched: # Look at movie data in user_watched
         {'title': 'Zero Dark Python', 'genre': 'Intrigue', 'rating': 3.0}]}]
     }
 '''
-    # user_data is a dict with 'watched' list of movie dicts and 'friends' list of friend dicts
-    # each friend has a 'watched' key
-    # each movie dict has a 'title' key
-    # find movies that at least one friend has watched but user has NOT watched
-    # return a list of movie dicts
 
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+def get_available_recs(user_data):
+    '''
+    Accepts one param: user_data(dict)
+    and returns recommended_movies(list)
+    '''
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    '''
+    Accepts one param: user_data(dict)
+    Returns recommended_movies(list)
+    '''
+
+def get_rec_from_favorites(user_data):
+    '''
+    Accepts one param: user_data(dict)
+    Returns recommended_movies(list) or
+    None if none of the user's friends have watched
+    '''
