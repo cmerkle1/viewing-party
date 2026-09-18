@@ -194,6 +194,16 @@ def get_available_recs(user_data):
     Accepts one param: user_data(dict)
     and returns recommended_movies(list)
     '''
+    rec_movies = [] # list to store movies that fit criteria
+
+    movie_from_friends = get_friends_unique_watched(user_data) # return list from wave 3 function
+
+    for movie in movie_from_friends:
+        if movie["host"] in user_data["subscriptions"]:
+            rec_movies.append(movie)
+
+    return rec_movies
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
@@ -203,6 +213,18 @@ def get_new_rec_by_genre(user_data):
     Accepts one param: user_data(dict)
     Returns recommended_movies(list)
     '''
+    # Empty list to store recommended movies
+    recommended_movies = []
+    movie_from_friends = get_friends_unique_watched(user_data) # return list from wave 3 function
+
+    # Users most frequent genre
+    top_genre = {}
+    user_watched = user_data["watched"] # Access the watched list of movies
+
+    for movie in user_watched:
+        if movie["genre"] not in top_genre:
+            top_genre["genre"] = 1
+        top_genre["genre"] += 1
 
 def get_rec_from_favorites(user_data):
     '''
